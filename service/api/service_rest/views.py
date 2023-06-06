@@ -23,7 +23,7 @@ def api_list_technicians(request):
             safe=False
         )
 
-@require_http_methods(["DELETE"])
+@require_http_methods(["GET", "DELETE"])
 def api_delete_technician(request, pk):
     if request.method == "DELETE":
         try:
@@ -35,6 +35,14 @@ def api_delete_technician(request, pk):
         except Technician.DoesNotExist:
             response = JsonResponse({"message":"Does not exist"}, status=400)
         return response
+    else:
+        technician = Technician.objects.get(employee_id=pk)
+        return JsonResponse(
+            technician,
+            encoder=TechnicianEncoder,
+            safe=False
+        )
+
 
 
 @require_http_methods(["GET", "POST"])
@@ -63,7 +71,7 @@ def api_list_appointments(request):
             safe=False
         )
 
-@require_http_methods(["DELETE"])
+@require_http_methods(["GET", "DELETE"])
 def api_delete_appointment(request, pk):
     if request.method == "DELETE":
         try:
@@ -77,6 +85,13 @@ def api_delete_appointment(request, pk):
         except Appointment.DoesNotExist:
             response = JsonResponse({"message": "Does not exist"}, status=404)
         return response
+    else:
+        appointment = Appointment.objects.get(id=pk)
+        return JsonResponse(
+            appointment,
+            encoder=AppointmentEncoder,
+            safe=False
+        )
 
 
 @require_http_methods(["PUT"])
@@ -109,24 +124,3 @@ def api_finish_appointment(request, id):
         except Appointment.DoesNotExist:
             response = JsonResponse({"message": "Does not exist"}, status=404)
     return response
-
-
-@require_http_methods(["GET"])
-def api_show_technician(request, pk):
-    if request.method == "GET":
-        technician = Technician.objects.get(employee_id=pk)
-        return JsonResponse(
-            technician,
-            encoder=TechnicianEncoder,
-            safe=False
-        )
-
-@require_http_methods(["GET"])
-def api_show_appointment(request, pk):
-    if request.method == "GET":
-        appointment = Appointment.objects.get(id=pk)
-        return JsonResponse(
-            appointment,
-            encoder=AppointmentEncoder,
-            safe=False
-        )
