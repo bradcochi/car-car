@@ -25,11 +25,15 @@ def get_automobiles():
             sold=automobile["sold"]
         )
 
+
 def poll(repeat=True):
     while True:
         print('Service poller polling for data')
         try:
-            get_automobiles()
+            # Write your polling logic, here
+            # Do not copy entire file
+            pass
+
         except Exception as e:
             print(e, file=sys.stderr)
 
