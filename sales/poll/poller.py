@@ -17,9 +17,7 @@ from sales_rest.models import Sale, Customer, Salesperson, AutomobileVO
 
 
 def get_automobiles():
-    print('Hit Before')
     response = requests.get("http://project-beta-inventory-api-1:8000/api/automobiles/")
-    print('Hit After', response)
     content = json.loads(response.content)
     for automobile in content["autos"]:
         AutomobileVO.objects.update_or_create(

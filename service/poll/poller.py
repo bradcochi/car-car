@@ -25,6 +25,7 @@ def get_automobiles():
             sold=automobile["sold"]
         )
 
+
 def poll(repeat=True):
     while True:
         print('Service poller polling for data')

@@ -74,30 +74,26 @@ def api_list_salespeople(request):
 # Needs to return 400 or 404 error
 
 
-# @require_http_methods(["GET"])
-# def api_show_salesperson(request, id):
-#     if request.method == "GET":
-#         salesperson = Salesperson.objects.get(id=id)
-#         return JsonResponse(
-#             salesperson,
-#             encoder=Salesperson,
-#             safe=False,
-#         )
-
-
-@require_http_methods(["DELETE"])
+@require_http_methods(["DELETE", "GET"])
 def api_salespeople(request, pk):
     if request.method == "DELETE":
         try:
             salesperson = Salesperson.objects.get(id=pk)
             salesperson.delete()
-            return JsonResponse(
-                salesperson,
-                encoder=SalespersonEncoder,
-                safe=False,
-            )
+
+            response = JsonResponse({"message": "Salesperson deleted"}, status=200)
+
         except Salesperson.DoesNotExist:
-            return JsonResponse({"message": "Does not exist"})
+            return JsonResponse({"message": "Does not exist"}, status=400)
+        return response
+    else:
+        salesperson = Salesperson.objects.get(id=pk)
+        return JsonResponse(
+            salesperson,
+            encoder=SalespersonEncoder,
+            safe=False,
+        )
+
 # Needs to return 400 or 404 error
 
 
@@ -127,19 +123,26 @@ def api_list_customers(request):
 # Needs to return 400 or 404 error
 
 
-@require_http_methods(["DELETE"])
+@require_http_methods(["DELETE", "GET"])
 def api_customers(request, pk):
     if request.method == "DELETE":
         try:
             customer = Customer.objects.get(id=pk)
             customer.delete()
-            return JsonResponse(
-                customer,
-                encoder=CustomerEncoder,
-                safe=False,
-            )
+
+            response = JsonResponse({"message": "Customer deleted"}, status=200)
+
         except Customer.DoesNotExist:
-            return JsonResponse({"message": "Does not exist"})
+            return JsonResponse({"message": "Does not exist"}, status=400)
+        return response
+    else:
+        customer = Customer.objects.get(id=pk)
+        return JsonResponse(
+            customer,
+            encoder=CustomerEncoder,
+            safe=False,
+        )
+
 # Needs to return 400 or 404 error
 
 
@@ -174,17 +177,44 @@ def api_list_sales(request):
 # Needs to return 400 or 404 error
 
 
-@require_http_methods(["DELETE"])
+@require_http_methods(["DELETE", "GET"])
 def api_sales(request, pk):
     if request.method == "DELETE":
         try:
             sale = Sale.objects.get(id=pk)
             sale.delete()
-            return JsonResponse(
-                sale,
-                encoder=SaleEncoder,
-                safe=False,
-            )
+
+            response = JsonResponse({"message": "Customer deleted"}, status=200)
+
         except Customer.DoesNotExist:
             return JsonResponse({"message": "Does not exist"})
+        return response
+    else:
+        sale = Sale.objects.get(id=pk)
+        return JsonResponse(
+            sale,
+            encoder=SaleEncoder,
+            safe=False,
+        )
+
 # Needs to return 400 or 404 error
+
+@require_http_methods(["DELETE", "GET"])
+def api_customers(request, pk):
+    if request.method == "DELETE":
+        try:
+            customer = Customer.objects.get(id=pk)
+            customer.delete()
+
+            response = JsonResponse({"message": "Customer deleted"}, status=200)
+
+        except Customer.DoesNotExist:
+            return JsonResponse({"message": "Does not exist"}, status=400)
+        return response
+    else:
+        customer = Customer.objects.get(id=pk)
+        return JsonResponse(
+            customer,
+            encoder=CustomerEncoder,
+            safe=False,
+        )
