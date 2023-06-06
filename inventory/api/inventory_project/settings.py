@@ -52,14 +52,17 @@ MIDDLEWARE = [
 ALLOWED_HOSTS = [
     "localhost",
     "project-beta-inventory-api-1",
+
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:3000",
+
 ]
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
+
 ]
 CORS_ALLOW_CREDENTIALS = True
 

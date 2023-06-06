@@ -30,6 +30,8 @@ DEBUG = True
 # Application definition
 
 INSTALLED_APPS = [
+    'service_rest.apps.ServiceRestConfig',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,6 +41,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -49,14 +52,18 @@ MIDDLEWARE = [
 
 ALLOWED_HOSTS = [
     "localhost",
+    "127.0.0.1",
+    "service-api",
+
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:3000",
-]
 
+]
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
+
 ]
 CORS_ALLOW_CREDENTIALS = True
 
