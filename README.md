@@ -3,7 +3,7 @@
 Team:
 
 * Blake - Auto Service service
-* Person 2 - Which microservice?
+* Brad - Sales service
 
 ## Design
 
