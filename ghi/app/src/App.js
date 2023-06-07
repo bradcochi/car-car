@@ -22,7 +22,8 @@ function App() {
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="technicians">
-            <Route index element={<AddTech />} />
+            <Route index element={<ListTechs/>} />
+            <Route path="new" element={<AddTech />}/>
           </Route>
           <Route path="salespeople">
             <Route index element={<SalespeopleList />} />
@@ -39,6 +40,12 @@ function App() {
           <Route path="models">
             <Route index element={<ModelsList />} />
           </Route>
+          <Route path="appointments">
+            <Route index element={<ListAppts/>}/>
+            <Route path="new" element={<AddAppt/>}/>
+            <Route path="history" element={<ServiceHistory/>}/>
+          </Route>
+
         </Routes>
       </div>
     </BrowserRouter>
