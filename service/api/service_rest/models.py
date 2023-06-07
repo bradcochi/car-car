@@ -11,11 +11,12 @@ class AutomobileVO(models.Model):
 class Technician(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
-    employee_id = models.IntegerField()
+    employee_id = models.IntegerField(unique=True)
 
 
 class Appointment(models.Model):
-    date_time = models.DateTimeField(auto_now=True)
+    date_time = models.DateTimeField(auto_now=True, null=True)
+    isVIP = models.BooleanField(default=False)
     reason = models.CharField(max_length=200)
     status = models.CharField(max_length=50, default="created")
     vin = models.CharField(max_length=17)
