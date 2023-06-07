@@ -52,6 +52,7 @@ class SaleEncoder(ModelEncoder):
         "customer": CustomerEncoder(),
     }
 
+
 @require_http_methods(["GET", "POST"])
 def api_list_salespeople(request):
     if request.method == "GET":
@@ -61,14 +62,14 @@ def api_list_salespeople(request):
             {"salespeople": salespeople},
             encoder=SalespersonEncoder,
         )
-    elif request.method == "POST":
-
+    else:
         content = json.loads(request.body)
 
         salesperson = Salesperson.objects.create(**content)
+
         return JsonResponse(
             salesperson,
-            encoder=Salesperson,
+            encoder=SalespersonEncoder,
             safe=False,
         )
 # Needs to return 400 or 404 error
@@ -110,10 +111,9 @@ def api_list_customers(request):
     elif request.method == "POST":
 
         content = json.loads(request.body)
-        print('Content', content)
 
         customer = Customer.objects.create(**content)
-        print('Customer', customer)
+
         return JsonResponse(
             customer,
             encoder=CustomerEncoder,
@@ -196,7 +196,6 @@ def api_sales(request, pk):
             encoder=SaleEncoder,
             safe=False,
         )
-
 # Needs to return 400 or 404 error
 
 @require_http_methods(["DELETE", "GET"])
