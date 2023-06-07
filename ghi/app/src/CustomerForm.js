@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-function SalespersonForm() {
+function CustomerForm() {
   const [first_name, setFirstName] = useState("");
   const handleFirstNameChange = (event) => {
     setFirstName(event.target.value);
@@ -11,9 +11,14 @@ function SalespersonForm() {
     setLastName(event.target.value);
   };
 
-  const [employee_id, setEmployeeId] = useState("");
-  const handleEmployeeIdChange = (event) => {
-    setEmployeeId(event.target.value);
+  const [address, setAddress] = useState("");
+  const handleAddressChange = (event) => {
+    setAddress(event.target.value);
+  };
+
+  const [phone_number, setPhoneNumber] = useState("");
+  const handlePhoneNumberChange = (event) => {
+    setPhoneNumber(event.target.value);
   };
 
   const handleSubmit = async (event) => {
@@ -23,9 +28,10 @@ function SalespersonForm() {
 
     data.first_name = first_name;
     data.last_name = last_name;
-    data.employee_id = employee_id;
+    data.address = address;
+    data.phone_number = phone_number;
 
-    const salespersonUrl = "http://localhost:8090/api/salespeople/";
+    const customerUrl = "http://localhost:8090/api/customers/";
     const fetchConfig = {
       method: "post",
       body: JSON.stringify(data),
@@ -33,14 +39,15 @@ function SalespersonForm() {
         "Content-Type": "application/json",
       },
     };
-    const response = await fetch(salespersonUrl, fetchConfig);
+    const response = await fetch(customerUrl, fetchConfig);
     if (response.ok) {
-      const newSalesperson = await response.json();
-      console.log(newSalesperson);
+      const newCustomer = await response.json();
+      console.log(newCustomer);
 
       setFirstName("");
       setLastName("");
-      setEmployeeId("");
+      setAddress("");
+      setPhoneNumber("");
     }
   };
 
@@ -48,8 +55,8 @@ function SalespersonForm() {
     <div className="row">
       <div className="offset-3 col-6">
         <div className="shadow p-4 mt-4">
-          <h1>Create a new salesperson!</h1>
-          <form onSubmit={handleSubmit} id="create-salesperson-form">
+          <h1>Create a new customer!</h1>
+          <form onSubmit={handleSubmit} id="create-customer-form">
             <div className="form-floating mb-3">
               <input
                 onChange={handleFirstNameChange}
@@ -78,16 +85,29 @@ function SalespersonForm() {
             </div>
             <div className="form-floating mb-3">
               <input
-                onChange={handleEmployeeIdChange}
-                value={employee_id}
-                placeholder="Employee ID"
+                onChange={handleAddressChange}
+                value={address}
+                placeholder="Address"
                 required
                 type="text"
-                name="employee_id"
-                id="employee_id"
+                name="address"
+                id="address"
                 className="form-control"
               />
-              <label htmlFor="employee_id">Employee ID</label>
+              <label htmlFor="address">Address</label>
+            </div>
+            <div className="form-floating mb-3">
+              <input
+                onChange={handlePhoneNumberChange}
+                value={phone_number}
+                placeholder="Phone Number"
+                required
+                type="text"
+                name="phone_number"
+                id="phone_number"
+                className="form-control"
+              />
+              <label htmlFor="phone_number">Phone Number</label>
               <button className="btn btn-primary">Create</button>
             </div>
           </form>
@@ -96,4 +116,4 @@ function SalespersonForm() {
     </div>
   );
 }
-export default SalespersonForm;
+export default CustomerForm;
