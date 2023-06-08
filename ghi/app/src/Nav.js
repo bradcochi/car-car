@@ -60,6 +60,21 @@ function Nav() {
                 Vehicle Models
               </NavLink>
             </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/sales/new">
+                Add a Sale
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/sales">
+                Sales
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/salespeople/history">
+                Salesperson History
+              </NavLink>
+            </li>
           </ul>
         </div>
       </div>

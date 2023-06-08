@@ -159,16 +159,18 @@ def api_list_sales(request):
 
         content = json.loads(request.body)
 
-        automobile = AutomobileVO.objects.get(import_href=content["automobile"])
+        automobile = AutomobileVO.objects.get(id=content["automobile"])
         content["automobile"] = automobile
 
-        salesperson = Salesperson.objects.get(employee_id=content["salesperson"])
+        salesperson = Salesperson.objects.get(id=content["salesperson"])
         content["salesperson"] = salesperson
 
-        customer = Customer.objects.get(phone_number=content["customer"])
+        customer = Customer.objects.get(id=content["customer"])
         content["customer"] = customer
 
         sale = Sale.objects.create(**content)
+
+
         return JsonResponse(
             sale,
             encoder=SaleEncoder,
