@@ -1,29 +1,30 @@
 import React, { useEffect, useState } from "react";
 
 function ModelForm() {
-    const [manufacturers, setManufacturers] = useState([])
+  const [manufacturers, setManufacturers] = useState([]);
 
-  const [name, setName] = useState("")
+  const [name, setName] = useState("");
   const handleNameChange = (event) => {
     setName(event.target.value);
-  }
-  const [picture, setPicture] = useState("")
+  };
+  const [picture, setPicture] = useState("");
   const handlePictureChange = (event) => {
-    setPicture(event.target.value)
-  }
-  const [manufacturerID, setManufacturerID] = useState("")
+    setPicture(event.target.value);
+  };
+  const [manufacturerID, setManufacturerID] = useState("");
   const handleManufacturerIDChange = (event) => {
-    setManufacturerID(event.target.value)
-  }
+    setManufacturerID(event.target.value);
+  };
 
   const handleSubmit = async (event) => {
-    event.preventDefault()
+    event.preventDefault();
 
-    const data = {}
+    const data = {};
 
-    data.name = name
-    data.picture_url = picture
-    data.manufacturer_id = manufacturerID
+    data.name = name;
+    data.picture_url = picture;
+    data.manufacturer_id = manufacturerID;
+    console.log({ manufacturerID });
 
     const modelUrl = "http://localhost:8100/api/models/";
     const fetchConfig = {
@@ -33,27 +34,32 @@ function ModelForm() {
         "Content-Type": "application/json",
       },
     };
-    const response = await fetch(modelUrl, fetchConfig);
-    if (response.ok) {
-      const newManufacturer = await response.json();
-      console.log(newManufacturer);
 
-      setName('')
-      setPicture('')
-      setManufacturerID('')
+    const response = await fetch(modelUrl, fetchConfig);
+    console.log({ response });
+    if (response.ok) {
+      const newModel = await response.json();
+      console.log(newModel);
+
+      setName("");
+      setPicture("");
+      setManufacturerID("");
     }
   };
+
   const fetchData = async () => {
-    const url = 'http://localhost:8100/api/manufacturers/';
-    const response = await fetch(url);
+    const manufacturersUrl = "http://localhost:8100/api/manufacturers/";
+    const response = await fetch(manufacturersUrl);
     if (response.ok) {
-        const data = await response.json();
-        setManufacturers(data.manufacturers);
+      const data = await response.json();
+      setManufacturers(data.manufacturers);
     }
-    }
-    useEffect(() => {
-        fetchData();
-    }, []);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
     <div className="row">
       <div className="offset-3 col-6">
@@ -87,16 +93,23 @@ function ModelForm() {
               <label htmlFor="name">Picture URL</label>
             </div>
             <div className="form-floating mb-3">
-                <select onChange={handleManufacturerIDChange} value={manufacturerID} required id="manufacturer" name='manufacturer' className="form-select">
-                  <option value="">Choose a Manufacturer</option>
-                  {manufacturers.map(manufacturer => {
-                    return (
-                      <option value={manufacturer.id} key={manufacturer.id}>
-                            {manufacturer.name}
-                        </option>
-                    )
-                  })}
-                </select>
+              <select
+                onChange={handleManufacturerIDChange}
+                value={manufacturerID}
+                required
+                id="manufacturer"
+                name="manufacturer"
+                className="form-select"
+              >
+                <option value="">Choose a Manufacturer</option>
+                {manufacturers.map((manufacturer) => {
+                  return (
+                    <option value={manufacturer.id} key={manufacturer.id}>
+                      {manufacturer.name}
+                    </option>
+                  );
+                })}
+              </select>
             </div>
             <button className="btn btn-primary">Create</button>
           </form>
