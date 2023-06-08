@@ -9,6 +9,7 @@ function SalesList() {
     if (response.ok) {
       const data = await response.json();
       setSales(data.sales);
+      console.log(data.sales);
     }
   };
 
@@ -26,6 +27,7 @@ function SalesList() {
   useEffect(() => {
     fetchData();
   }, []);
+
   return (
     <>
       <header>
@@ -44,11 +46,16 @@ function SalesList() {
         <tbody className="border-top border-dark-subtle">
           {sales.map((sale) => {
             return (
-              <tr key={sales.id}>
-                <td>{sale.first_name}</td>
-                <td>{sale.last_name}</td>
-                <td>{sale.salesperson}</td>
-                <td>{sale.vin}</td>
+              <tr key={sale.id}>
+                <td>{sale.salesperson.employee_id}</td>
+                <td>
+                  {sale.salesperson.first_name} {sale.salesperson.last_name}
+                </td>
+                <td>
+                  {sale.customer.first_name} {sale.customer.last_name}
+                </td>
+                <td>{sale.automobile.vin}</td>
+                <td>{sale.price}</td>
                 {/* <td><button onClick={() => deleteSalesperson(salesperson.id)}> Delete </button></td> */}
               </tr>
             );

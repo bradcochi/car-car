@@ -170,7 +170,6 @@ def api_list_sales(request):
 
         sale = Sale.objects.create(**content)
 
-
         return JsonResponse(
             sale,
             encoder=SaleEncoder,
@@ -186,7 +185,7 @@ def api_sales(request, pk):
             sale = Sale.objects.get(id=pk)
             sale.delete()
 
-            response = JsonResponse({"message": "Customer deleted"}, status=200)
+            response = JsonResponse({"message": "Sale deleted"}, status=200)
 
         except Customer.DoesNotExist:
             return JsonResponse({"message": "Does not exist"})
@@ -199,6 +198,7 @@ def api_sales(request, pk):
             safe=False,
         )
 # Needs to return 400 or 404 error
+
 
 @require_http_methods(["DELETE", "GET"])
 def api_customers(request, pk):
