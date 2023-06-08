@@ -48,7 +48,7 @@ function AutomobilesForm() {
           setColor('')
           setModelID('')
           setYear('')
-          setModelID('')
+          setVin('')
       }
     }
     const fetchData = async () => {
@@ -88,7 +88,7 @@ function AutomobilesForm() {
                   <option value="">Choose a model...</option>
                   {models.map(model => {
                     return (
-                        <option key={model.id}>
+                      <option value={model.id} key={model.id}>
                             {model.name}
                         </option>
                     )

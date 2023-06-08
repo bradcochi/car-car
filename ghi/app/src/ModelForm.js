@@ -89,10 +89,10 @@ function ModelForm() {
             <div className="form-floating mb-3">
                 <select onChange={handleManufacturerIDChange} value={manufacturerID} required id="manufacturer" name='manufacturer' className="form-select">
                   <option value="">Choose a Manufacturer</option>
-                  {manufacturers.map(manufacturers => {
+                  {manufacturers.map(manufacturer => {
                     return (
-                        <option key={manufacturers.href}>
-                            {manufacturers.name}
+                      <option value={manufacturer.id} key={manufacturer.id}>
+                            {manufacturer.name}
                         </option>
                     )
                   })}

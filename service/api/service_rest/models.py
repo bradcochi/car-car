@@ -15,7 +15,7 @@ class Technician(models.Model):
 
 
 class Appointment(models.Model):
-    date_time = models.DateTimeField(auto_now=True, null=True)
+    date_time = models.DateTimeField(null=True)
     isVIP = models.BooleanField(default=False)
     reason = models.CharField(max_length=200)
     status = models.CharField(max_length=50, default="created")

@@ -2,6 +2,8 @@ import React, {useState, useEffect} from "react";
 
 function ServiceHistory() {
     const[appointments, setAppointments] = useState([])
+    const[autos, setAutos] = useState([])
+    const[filtered, setFiltered] = useState([])
 
     const [query, setQuery] = useState("")
     const handleQueryChange = (event) => {
@@ -17,8 +19,26 @@ function ServiceHistory() {
         }
     }
 
+    const autosData = async () => {
+        const url = "http://localhost:8100/api/automobiles/";
+        const response = await fetch(url);
+        if (response.ok) {
+            const data = await response.json();
+            setAutos(data.autos);
+        }
+    }
+
+    const handleSubmitForSearch = () => {
+        const filtered = appointments.filter(appointment => {
+            return appointment.vin.toLowerCase().includes(query.toLowerCase())
+        })
+        setFiltered(filtered)
+    }
+
     useEffect(() => {
         fetchData();
+        autosData();
+        handleSubmitForSearch()
     }, []);
     return (
         <>
@@ -26,7 +46,7 @@ function ServiceHistory() {
                 {/* <label htmlFor="search">Search by VIN</label> */}
             </div>
             <div className="my-5">
-                <input placeholder="Search VIN" onChange={handleQueryChange} />
+                <input placeholder="Search VIN" onChange={handleQueryChange} value={query}/>
                 {
                     query && appointments.filter(appointment => {
                         if (query === '') {
@@ -41,7 +61,7 @@ function ServiceHistory() {
                         </div>
                     ))
                 }
-                <button onClick={() => []} type="button" className="btn btn-dark">Search</button>
+                <button onClick={handleSubmitForSearch} type="button" className="btn btn-dark">Search</button>
             </div>
 
                 <table className="table table-hover table-secondary table-striped border border-dark-subtle shadow container-fluid mt-5">
@@ -66,7 +86,13 @@ function ServiceHistory() {
                             return (
                                 <tr key={appointment.href}>
                                     <td>{ appointment.vin }</td>
-                                    <td>{ appointment.isVIP }</td>
+                                    <td>
+                                    {autos.find((auto) => auto.vin === appointment.vin && auto.sold) ? (
+                                        <span className="text-success">Yes</span>
+                                    ) : (
+                                        <span className="text-danger">No</span>
+                                    )}
+                                    </td>
                                     <td>{ appointment.customer }</td>
                                     <td>{ date }</td>
                                     <td>{ time }</td>

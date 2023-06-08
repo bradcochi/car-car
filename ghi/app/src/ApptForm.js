@@ -1,7 +1,9 @@
 import React, {useEffect, useState} from 'react';
 
+
 function AddAppt() {
-    const[technicians, setTechnicians] = useState([])
+    const [technicians, setTechnicians] = useState([])
+
 
     const [vin, setVin] = useState("")
     const handleVinChange = (event) => {
@@ -13,14 +15,9 @@ function AddAppt() {
         setCustomer(event.target.value)
     }
 
-    const [date, setDate] = useState("")
-    const handleDateChange = (event) => {
-        setDate(event.target.value)
-    }
-
-    const [time, setTime] = useState("")
-    const handleTimeChange = (event) => {
-        setTime(event.target.value)
+    const [date_time, setDateTime] = useState("")
+    const handleDateTimeChange = (event) => {
+        setDateTime(event.target.value)
     }
 
     const [technician, setTechnician] = useState("")
@@ -41,8 +38,7 @@ function AddAppt() {
 
         data.vin = vin
         data.customer = customer
-        // data.date = new Date(date_time).toLocaleDateString()
-        // data.time = new Date(date_time).toLocaleTimeString()
+        data.date_time = date_time
         data.technician = technician
         data.reason = reason
 
@@ -61,8 +57,7 @@ function AddAppt() {
 
             setVin('');
             setCustomer('');
-            setDate('');
-            setTime('');
+            setDateTime('');
             setTechnician('');
             setReason('');
         }
@@ -96,11 +91,7 @@ function AddAppt() {
                 <label htmlFor="customer">Customer name</label>
               </div>
               <div className="form-floating mb-3">
-                <input onChange={handleDateChange} value={date} placeholder="Date" required type="date" name='date' id="date" className="form-control"/>
-                <label htmlFor="date">Date</label>
-              </div>
-              <div className="form-floating mb-3">
-                <input onChange={handleTimeChange} value={time} placeholder="Time" required type="time" name='time' id="time" className="form-control"/>
+                <input onChange={handleDateTimeChange} value={date_time} placeholder="Date & Time" required type="datetime-local" name='time' id="time" className="form-control"/>
                 <label htmlFor="time">Time</label>
               </div>
               <div className="mb-3">
@@ -110,7 +101,7 @@ function AddAppt() {
 
                     return (
 
-                        <option key={technician.employee_id}>
+                        <option key={technician.employee_id} value={technician.employee_id}>
                             {technician.first_name } {technician.last_name}
                         </option>
                     )

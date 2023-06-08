@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from "react";
 
-function ApptList
-() {
+function ApptList() {
     const[appointments, setAppointments] = useState([])
+    const[autos, setAutos] = useState([])
 
     const fetchData = async () => {
         const url = "http://localhost:8080/api/appointments/"
@@ -10,32 +10,38 @@ function ApptList
         if (response.ok) {
             const data = await response.json()
             setAppointments(data.appointments)
+
+        }
+    }
+    const autosData = async () => {
+        const url = "http://localhost:8100/api/automobiles/";
+        const response = await fetch(url);
+        if (response.ok) {
+            const data = await response.json();
+            setAutos(data.autos);
+        }
+    }
+    const updateAppointments = async () => {
+        const url = "http://localhost:8080/api/appointments/"
+        const response = await fetch(url)
+        if (response.ok) {
+            const data = await response.json()
+            // setAppointments(data.appointments)
             localStorage.setItem("appointments", JSON.stringify(data.appointments))
         }
     }
-    // const fetchVIP = async () => {
-    //     const url = "http://localhost:8100/api/automobiles/"
-    //     const response = await fetch(url)
-    //     if (response.ok) {
-    //         const data = await response.json()
-    //         const updatedAppointments = appointments.map((appointment) => {
-    //             const isVIP = data.autos.find((auto) => auto.id === appointment.vin)?.sold || false
-
-    //         })
-    //         setAppointments(updatedAppointments)
-    //         }else{
-    //             console.error("Couldnt fetch VIP data")
-    //         }
-    // };
 
     useEffect(() => {
         const stored = localStorage.getItem("appointments")
         if (stored) {
             setAppointments(JSON.parse(stored))
 
+
         }else{
             fetchData();
         }
+        autosData();updateAppointments();
+
 
 
     }, []);
@@ -100,11 +106,12 @@ function ApptList
                             <tr key={appointment.id}>
                                 <td>{ appointment.vin }</td>
                                 <td>
-                                {appointment.isVIP ? (
-                                    <span className="text-success">Yes</span>
+                                {autos.find((auto) => auto.vin === appointment.vin && auto.sold) ? (
+                                        <span className="text-success">Yes</span>
                                     ) : (
-                                    <span className="text-danger">No</span>
+                                        <span className="text-danger">No</span>
                                     )}
+
                                 </td>
                                 <td>{ appointment.customer }</td>
                                 <td>{ apptDate }</td>
