@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 
 function ServiceHistory() {
     const[appointments, setAppointments] = useState([])
@@ -8,32 +8,30 @@ function ServiceHistory() {
     const handleSearchChange = (event) => {
         setSearch(event.target.value)
     }
-    console.log(search)
+
 
     const [query, setQuery] = useState("")
     const handleQueryChange = (event) => {
         setQuery(event.target.value)
     }
 
-    const fetchData = async () => {
-        const url = "http://localhost:8080/api/appointments/"
-        const response = await fetch(url)
-        if (response.ok) {
-            const data = await response.json()
-            setAppointments(data.appointments)
-        }
+  const fetchData = async () => {
+    const url = "http://localhost:8080/api/appointments/";
+    const response = await fetch(url);
+    if (response.ok) {
+      const data = await response.json();
+      setAppointments(data.appointments);
     }
+  };
 
-    const autosData = async () => {
-        const url = "http://localhost:8100/api/automobiles/";
-        const response = await fetch(url);
-        if (response.ok) {
-            const data = await response.json();
-            setAutos(data.autos);
-        }
+  const autosData = async () => {
+    const url = "http://localhost:8100/api/automobiles/";
+    const response = await fetch(url);
+    if (response.ok) {
+      const data = await response.json();
+      setAutos(data.autos);
     }
-
-
+    }
 
     useEffect(() => {
         fetchData();
@@ -94,4 +92,4 @@ function ServiceHistory() {
         </>
     )
 }
-export default ServiceHistory
+export default ServiceHistory;

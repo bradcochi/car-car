@@ -53,11 +53,16 @@ function SaleForm() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    const foundAutomobile = automobiles.find(
+      (thisAutomobile) => thisAutomobile.id === Number(automobile)
+    );
+
     const data = {};
     data.automobile = automobile;
     data.salesperson = salesperson;
     data.customer = customer;
     data.price = price;
+
     const salesUrl = "http://localhost:8090/api/sales/";
     const fetchConfig = {
       method: "post",
@@ -69,12 +74,22 @@ function SaleForm() {
     const response = await fetch(salesUrl, fetchConfig);
     if (response.ok) {
       const newSale = await response.json();
-      console.log(newSale);
+
       setAutomobile("");
       setSalesperson("");
       setCustomer("");
       setPrice("");
     }
+
+    const automobilesUrl = `http://localhost:8100/api/automobiles/${foundAutomobile.vin}/`;
+    const automobilesFetchConfig = {
+      method: "put",
+      body: JSON.stringify({ sold: true }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    fetch(automobilesUrl, automobilesFetchConfig);
   };
 
   useEffect(() => {

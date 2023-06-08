@@ -12,17 +12,6 @@ function CustomersList() {
     }
   };
 
-  // function deleteSalesperson(id) {
-  //     fetch(`http://localhost:8090/api/salespeople/${id}`, {
-  //         method: 'DELETE'
-  //     }).then((result) => {
-  //         fetchData()
-  //         result.json().then((resp) => {
-  //         console.warn(resp)
-  //     })
-  // })
-  // }
-
   useEffect(() => {
     fetchData();
   }, []);
@@ -48,7 +37,6 @@ function CustomersList() {
                 <td>{customer.last_name}</td>
                 <td>{customer.address}</td>
                 <td>{customer.phone_number}</td>
-                {/* <td><button onClick={() => deleteSalesperson(salesperson.id)}> Delete </button></td> */}
               </tr>
             );
           })}

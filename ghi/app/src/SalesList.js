@@ -12,20 +12,10 @@ function SalesList() {
     }
   };
 
-  // function deleteSalesperson(id) {
-  //     fetch(`http://localhost:8090/api/salespeople/${id}`, {
-  //         method: 'DELETE'
-  //     }).then((result) => {
-  //         fetchData()
-  //         result.json().then((resp) => {
-  //         console.warn(resp)
-  //     })
-  // })
-  // }
-
   useEffect(() => {
     fetchData();
   }, []);
+
   return (
     <>
       <header>
@@ -44,12 +34,16 @@ function SalesList() {
         <tbody className="border-top border-dark-subtle">
           {sales.map((sale) => {
             return (
-              <tr key={sales.id}>
-                <td>{sale.first_name}</td>
-                <td>{sale.last_name}</td>
-                <td>{sale.salesperson}</td>
-                <td>{sale.vin}</td>
-                {/* <td><button onClick={() => deleteSalesperson(salesperson.id)}> Delete </button></td> */}
+              <tr key={sale.id}>
+                <td>{sale.salesperson.employee_id}</td>
+                <td>
+                  {sale.salesperson.first_name} {sale.salesperson.last_name}
+                </td>
+                <td>
+                  {sale.customer.first_name} {sale.customer.last_name}
+                </td>
+                <td>{sale.automobile.vin}</td>
+                <td>{sale.price}</td>
               </tr>
             );
           })}
