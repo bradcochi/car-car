@@ -57,6 +57,10 @@ function App() {
             <Route path="new" element={<AddAppt />} />
             <Route path="history" element={<ServiceHistory />} />
           </Route>
+          <Route path="sales">
+            <Route index element={<SalesList />} />
+            <Route path="new" element={<SaleForm />} />
+          </Route>
         </Routes>
       </div>
     </BrowserRouter>
