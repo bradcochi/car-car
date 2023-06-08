@@ -43,7 +43,6 @@ function AutomobilesForm() {
     const response = await fetch(automobileUrl, fetchConfig);
     if (response.ok) {
       const newAuto = await response.json();
-      console.log(newAuto);
 
       setColor("");
       setModelID("");

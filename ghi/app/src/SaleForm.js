@@ -56,9 +56,7 @@ function SaleForm() {
     const foundAutomobile = automobiles.find(
       (thisAutomobile) => thisAutomobile.id === Number(automobile)
     );
-    console.log({ foundAutomobile });
-    console.log({ automobiles });
-    console.log({ automobile });
+
     const data = {};
     data.automobile = automobile;
     data.salesperson = salesperson;

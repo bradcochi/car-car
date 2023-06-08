@@ -9,20 +9,8 @@ function SalesList() {
     if (response.ok) {
       const data = await response.json();
       setSales(data.sales);
-      console.log(data.sales);
     }
   };
-
-  // function deleteSalesperson(id) {
-  //     fetch(`http://localhost:8090/api/salespeople/${id}`, {
-  //         method: 'DELETE'
-  //     }).then((result) => {
-  //         fetchData()
-  //         result.json().then((resp) => {
-  //         console.warn(resp)
-  //     })
-  // })
-  // }
 
   useEffect(() => {
     fetchData();
@@ -56,7 +44,6 @@ function SalesList() {
                 </td>
                 <td>{sale.automobile.vin}</td>
                 <td>{sale.price}</td>
-                {/* <td><button onClick={() => deleteSalesperson(salesperson.id)}> Delete </button></td> */}
               </tr>
             );
           })}

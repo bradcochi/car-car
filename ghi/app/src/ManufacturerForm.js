@@ -24,7 +24,6 @@ function ManufacturerForm() {
     const response = await fetch(manufacturerUrl, fetchConfig);
     if (response.ok) {
       const newManufacturer = await response.json();
-      console.log(newManufacturer);
 
       setName("");
     }
@@ -48,7 +47,6 @@ function ManufacturerForm() {
                 className="form-control"
               />
               <label htmlFor="name">Name</label>
-
             </div>
             <button className="btn btn-primary">Create</button>
           </form>

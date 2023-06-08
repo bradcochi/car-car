@@ -12,17 +12,6 @@ function ManufacturersList() {
     }
   };
 
-  // function deleteSalesperson(id) {
-  //     fetch(`http://localhost:8090/api/salespeople/${id}`, {
-  //         method: 'DELETE'
-  //     }).then((result) => {
-  //         fetchData()
-  //         result.json().then((resp) => {
-  //         console.warn(resp)
-  //     })
-  // })
-  // }
-
   useEffect(() => {
     fetchData();
   }, []);
@@ -42,7 +31,6 @@ function ManufacturersList() {
             return (
               <tr key={manufacturer.id}>
                 <td>{manufacturer.name}</td>
-                {/* <td><button onClick={() => deleteSalesperson(salesperson.id)}> Delete </button></td> */}
               </tr>
             );
           })}

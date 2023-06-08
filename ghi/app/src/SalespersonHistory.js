@@ -4,19 +4,16 @@ function SalespersonHistory() {
   const [sales, setSales] = useState([]);
   const [salespeople, setSalespeople] = useState([]);
   const [salesperson, setSalesperson] = useState();
-  console.log(salesperson);
 
   const filteredSales = sales.filter(
     (sale) => sale.salesperson.id === Number(salesperson)
   );
-  console.log({ filteredSales });
 
   const fetchData = async () => {
     const salespeopleUrl = "http://localhost:8090/api/salespeople/";
     const salespeopleResponse = await fetch(salespeopleUrl);
     if (salespeopleResponse.ok) {
       const data = await salespeopleResponse.json();
-      console.log(data.salespeople);
       setSalespeople(data.salespeople);
     }
 
@@ -25,7 +22,6 @@ function SalespersonHistory() {
     if (salesResponse.ok) {
       const data = await salesResponse.json();
       setSales(data.sales);
-      console.log(data.sales);
     }
   };
 
@@ -83,7 +79,6 @@ function SalespersonHistory() {
                 </td>
                 <td>{sale.automobile.vin}</td>
                 <td>{sale.price}</td>
-                {/* <td><button onClick={() => deleteSalesperson(salesperson.id)}> Delete </button></td> */}
               </tr>
             );
           })}

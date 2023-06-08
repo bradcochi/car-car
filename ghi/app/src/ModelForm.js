@@ -24,7 +24,6 @@ function ModelForm() {
     data.name = name;
     data.picture_url = picture;
     data.manufacturer_id = manufacturerID;
-    console.log({ manufacturerID });
 
     const modelUrl = "http://localhost:8100/api/models/";
     const fetchConfig = {
@@ -36,10 +35,8 @@ function ModelForm() {
     };
 
     const response = await fetch(modelUrl, fetchConfig);
-    console.log({ response });
     if (response.ok) {
       const newModel = await response.json();
-      console.log(newModel);
 
       setName("");
       setPicture("");
