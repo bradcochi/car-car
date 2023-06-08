@@ -106,12 +106,11 @@ function ApptList() {
                             <tr key={appointment.id}>
                                 <td>{ appointment.vin }</td>
                                 <td>
-                                {autos.find((auto) => auto.vin === appointment.vin && auto.sold) ? (
-                                        <span className="text-success">Yes</span>
-                                    ) : (
-                                        <span className="text-danger">No</span>
-                                    )}
-
+                                    {autos.find((auto) => auto.vin === appointment.vin && auto.sold) ? (
+                                            <span className="text-success">Yes</span>
+                                        ) : (
+                                            <span className="text-danger">No</span>
+                                        )}
                                 </td>
                                 <td>{ appointment.customer }</td>
                                 <td>{ apptDate }</td>

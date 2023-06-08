@@ -3,7 +3,12 @@ import React, {useState, useEffect} from "react";
 function ServiceHistory() {
     const[appointments, setAppointments] = useState([])
     const[autos, setAutos] = useState([])
-    const[filtered, setFiltered] = useState([])
+
+    const [search, setSearch] = useState('')
+    const handleSearchChange = (event) => {
+        setSearch(event.target.value)
+    }
+    console.log(search)
 
     const [query, setQuery] = useState("")
     const handleQueryChange = (event) => {
@@ -28,40 +33,18 @@ function ServiceHistory() {
         }
     }
 
-    const handleSubmitForSearch = () => {
-        const filtered = appointments.filter(appointment => {
-            return appointment.vin.toLowerCase().includes(query.toLowerCase())
-        })
-        setFiltered(filtered)
-    }
+
 
     useEffect(() => {
         fetchData();
         autosData();
-        handleSubmitForSearch()
+
     }, []);
     return (
         <>
-            <div>
-                {/* <label htmlFor="search">Search by VIN</label> */}
-            </div>
-            <div className="my-5">
-                <input placeholder="Search VIN" onChange={handleQueryChange} value={query}/>
-                {
-                    query && appointments.filter(appointment => {
-                        if (query === '') {
-                        return appointment;
-                        } else if (appointment.vin.toLowerCase().includes(query.toLowerCase())) {
-                        return appointment;
-                        }
-                    }).map((appointment, vin) => (
-                        <div className="box" key={vin}>
-                        <p>{appointment.vin}</p>
 
-                        </div>
-                    ))
-                }
-                <button onClick={handleSubmitForSearch} type="button" className="btn btn-dark">Search</button>
+            <div className="my-5">
+                <input type="search" placeholder="Search VIN" onChange={handleSearchChange}/>
             </div>
 
                 <table className="table table-hover table-secondary table-striped border border-dark-subtle shadow container-fluid mt-5">
@@ -78,13 +61,15 @@ function ServiceHistory() {
                         </tr>
                     </thead>
                     <tbody className="border-top border-dark-subtle">
-                        {appointments.map(appointment => {
+                        {appointments.filter((appointment) => {
+                            return search.toLowerCase() === '' ? appointment : appointment.vin.toLowerCase().includes(search)
+                        }).map(appointment => {
                             const dateTime = new Date(appointment.date_time)
                             const date = dateTime.toLocaleDateString()
                             const time = dateTime.toLocaleTimeString()
 
                             return (
-                                <tr key={appointment.href}>
+                                <tr key={appointment.id}>
                                     <td>{ appointment.vin }</td>
                                     <td>
                                     {autos.find((auto) => auto.vin === appointment.vin && auto.sold) ? (
