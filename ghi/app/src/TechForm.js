@@ -22,9 +22,9 @@ function AddTech() {
         event.preventDefault()
 
         const data = {}
-        data.first = first
-        data.last = last
-        data.employeeID = employeeID
+        data.first_name = first
+        data.last_name = last
+        data.employee_id = employeeID
 
         console.log(data)
 
@@ -47,17 +47,7 @@ function AddTech() {
         }
 
     }
-    const fetchData = async () => {
-        const url = "http://localhost:8100/api/automobiles/"
-        const response = await fetch(url)
-        if (response.ok) {
-            const data = await response.json()
 
-        }
-    }
-    useEffect(() => {
-        fetchData();
-    }, []);
     return (
         <div className="row">
          <div className="offset-3 col-6">

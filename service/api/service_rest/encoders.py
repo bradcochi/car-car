@@ -27,6 +27,7 @@ class AppointmentEncoder(ModelEncoder):
     properties = [
         "id",
         "date_time",
+        "isVIP",
         "reason",
         "status",
         "vin",

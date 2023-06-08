@@ -23,7 +23,7 @@ def get_automobiles():
         AutomobileVO.objects.update_or_create(
             import_href=automobile["href"],
             vin=automobile["vin"],
-            sold=automobile["sold"],
+            sold=automobile["sold"]
         )
 
 

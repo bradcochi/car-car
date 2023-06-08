@@ -9,6 +9,13 @@ import CustomersList from "./CustomersList";
 import ManufacturersList from "./ManufacturersList";
 import ManufacturerForm from "./ManufacturerForm";
 import ModelsList from "./ModelsList";
+import TechsLists from "./TechsList";
+import ApptList from "./ApptList";
+import AddAppt from "./ApptForm";
+import ServiceHistory from "./ServiceHistory";
+import ModelForm from "./ModelForm";
+import AutomobilesForm from "./AutosForm";
+import AutosList from "./AutosList";
 import SaleForm from "./SaleForm";
 import SalesList from "./SalesList";
 import SalespersonHistory from "./SalespersonHistory";
@@ -21,7 +28,8 @@ function App() {
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="technicians">
-            <Route index element={<AddTech />} />
+            <Route index element={<TechsLists />} />
+            <Route path="new" element={<AddTech />} />
           </Route>
           <Route path="salespeople">
             <Route index element={<SalespeopleList />} />
@@ -38,10 +46,16 @@ function App() {
           </Route>
           <Route path="models">
             <Route index element={<ModelsList />} />
+            <Route path="new" element={<ModelForm />} />
           </Route>
-          <Route path="sales">
-            <Route index element={<SalesList />} />
-            <Route path="new" element={<SaleForm />} />
+          <Route path="automobiles">
+            <Route index element={<AutosList />} />
+            <Route path="new" element={<AutomobilesForm />} />
+          </Route>
+          <Route path="appointments">
+            <Route index element={<ApptList />} />
+            <Route path="new" element={<AddAppt />} />
+            <Route path="history" element={<ServiceHistory />} />
           </Route>
         </Routes>
       </div>
