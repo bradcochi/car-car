@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 function CustomerForm() {
   const [first_name, setFirstName] = useState("");
@@ -41,8 +41,6 @@ function CustomerForm() {
     };
     const response = await fetch(customerUrl, fetchConfig);
     if (response.ok) {
-      const newCustomer = await response.json();
-
       setFirstName("");
       setLastName("");
       setAddress("");

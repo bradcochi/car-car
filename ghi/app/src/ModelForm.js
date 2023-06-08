@@ -36,8 +36,6 @@ function ModelForm() {
 
     const response = await fetch(modelUrl, fetchConfig);
     if (response.ok) {
-      const newModel = await response.json();
-
       setName("");
       setPicture("");
       setManufacturerID("");

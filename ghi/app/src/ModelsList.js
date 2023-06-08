@@ -38,6 +38,7 @@ function ModelsList() {
                   <img
                     className="img-fluid img-thumbnail"
                     src={model.picture_url}
+                    alt={model.name}
                   ></img>
                 </td>
               </tr>

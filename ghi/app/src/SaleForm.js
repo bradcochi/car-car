@@ -73,8 +73,6 @@ function SaleForm() {
     };
     const response = await fetch(salesUrl, fetchConfig);
     if (response.ok) {
-      const newSale = await response.json();
-
       setAutomobile("");
       setSalesperson("");
       setCustomer("");
@@ -89,7 +87,8 @@ function SaleForm() {
         "Content-Type": "application/json",
       },
     };
-    fetch(automobilesUrl, automobilesFetchConfig);
+    await fetch(automobilesUrl, automobilesFetchConfig);
+    fetchData();
   };
 
   useEffect(() => {

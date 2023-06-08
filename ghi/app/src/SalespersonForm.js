@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 function SalespersonForm() {
   const [first_name, setFirstName] = useState("");
@@ -35,8 +35,6 @@ function SalespersonForm() {
     };
     const response = await fetch(salespersonUrl, fetchConfig);
     if (response.ok) {
-      const newSalesperson = await response.json();
-
       setFirstName("");
       setLastName("");
       setEmployeeId("");
