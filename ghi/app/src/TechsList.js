@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 
 
 
-function ListTechs () {
+function TechsList () {
     const [technicians, setTechnicians] = useState([]);
     const fetchData = async () => {
         const url = "http://localhost:8080/api/technicians/";
@@ -54,4 +54,4 @@ function ListTechs () {
         </>
     )
 }
-export default ListTechs
+export default TechsList

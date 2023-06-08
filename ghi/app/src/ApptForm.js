@@ -36,12 +36,13 @@ function AddAppt() {
     const handleSubmit = async (event) => {
         event.preventDefault()
 
+
         const data = {}
 
         data.vin = vin
         data.customer = customer
-        data.date = date
-        data.time = time
+        // data.date = new Date(date_time).toLocaleDateString()
+        // data.time = new Date(date_time).toLocaleTimeString()
         data.technician = technician
         data.reason = reason
 
@@ -66,14 +67,14 @@ function AddAppt() {
             setReason('');
         }
     }
-const fetchData = async () => {
-    const url = "http://localhost:8080/api/technicians/"
-    const response = await fetch(url)
-    if (response.ok) {
-        const data = await response.json()
-        setTechnicians(data.technicians)
+    const fetchData = async () => {
+        const url = "http://localhost:8080/api/technicians/"
+        const response = await fetch(url)
+        if (response.ok) {
+            const data = await response.json()
+            setTechnicians(data.technicians)
+        }
     }
-}
 
     useEffect(() => {
         fetchData();
@@ -106,11 +107,11 @@ const fetchData = async () => {
                 <select onChange={handleTechnicianChange} value={technician} required id="technician" name='technician' className="form-select">
                   <option value="">Choose a technician</option>
                   {technicians.map(technician => {
-                    const name = technician.first_name + technician.last_name
+
                     return (
 
                         <option key={technician.employee_id}>
-                            {technician.employee_id}
+                            {technician.first_name } {technician.last_name}
                         </option>
                     )
                   })}

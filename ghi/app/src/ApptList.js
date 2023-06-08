@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 
-function ListAppts() {
+function ApptList
+() {
     const[appointments, setAppointments] = useState([])
 
     const fetchData = async () => {
@@ -92,16 +93,22 @@ function ListAppts() {
                 <tbody className="border-top border-dark-subtle">
                     {appointments.map(appointment => {
                         const dateTime = new Date(appointment.date_time)
-                        const date = dateTime.toLocaleDateString()
-                        const time = dateTime.toLocaleTimeString()
+                        const apptDate = dateTime.toLocaleDateString()
+                        const apptTime = dateTime.toLocaleTimeString()
 
                         return (
-                            <tr key={appointment.href}>
+                            <tr key={appointment.id}>
                                 <td>{ appointment.vin }</td>
-                                <td>{ appointment.isVIP }</td>
+                                <td>
+                                {appointment.isVIP ? (
+                                    <span className="text-success">Yes</span>
+                                    ) : (
+                                    <span className="text-danger">No</span>
+                                    )}
+                                </td>
                                 <td>{ appointment.customer }</td>
-                                <td>{ date }</td>
-                                <td>{ time }</td>
+                                <td>{ apptDate }</td>
+                                <td>{ apptTime }</td>
                                 <td>{ appointment.technician } </td>
                                 <td>{ appointment.reason }</td>
                                 <td>
@@ -116,4 +123,4 @@ function ListAppts() {
         </>
     )
 }
-export default ListAppts
+export default ApptList

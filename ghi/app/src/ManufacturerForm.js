@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 function ManufacturerForm() {
   const [name, setName] = useState("");
@@ -48,8 +48,9 @@ function ManufacturerForm() {
                 className="form-control"
               />
               <label htmlFor="name">Name</label>
-              <button className="btn btn-primary">Create</button>
+
             </div>
+            <button className="btn btn-primary">Create</button>
           </form>
         </div>
       </div>
