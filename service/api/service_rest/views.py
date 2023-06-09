@@ -4,8 +4,7 @@ from django.views.decorators.http import require_http_methods
 import json
 from .models import Appointment, Technician, AutomobileVO
 from .encoders import AppointmentEncoder, TechnicianEncoder, AutomobileVOEncoder
-# from inventory.api.inventory_rest.models import Automobile
-# Create your views here.
+
 
 @require_http_methods(["GET", "POST"])
 def api_list_technicians(request):

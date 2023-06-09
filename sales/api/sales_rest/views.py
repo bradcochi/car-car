@@ -72,7 +72,6 @@ def api_list_salespeople(request):
             encoder=SalespersonEncoder,
             safe=False,
         )
-# Needs to return 400 or 404 error
 
 
 @require_http_methods(["DELETE", "GET"])
@@ -94,8 +93,6 @@ def api_salespeople(request, pk):
             encoder=SalespersonEncoder,
             safe=False,
         )
-
-# Needs to return 400 or 404 error
 
 
 @require_http_methods(["GET", "POST"])
@@ -120,7 +117,6 @@ def api_list_customers(request):
             safe=False,
         )
     return JsonResponse({"message": "Does not exist"})
-# Needs to return 400 or 404 error
 
 
 @require_http_methods(["DELETE", "GET"])
@@ -142,8 +138,6 @@ def api_customers(request, pk):
             encoder=CustomerEncoder,
             safe=False,
         )
-
-# Needs to return 400 or 404 error
 
 
 @require_http_methods(["GET", "POST"])
@@ -175,7 +169,6 @@ def api_list_sales(request):
             encoder=SaleEncoder,
             safe=False,
         )
-# Needs to return 400 or 404 error
 
 
 @require_http_methods(["DELETE", "GET"])
@@ -197,7 +190,6 @@ def api_sales(request, pk):
             encoder=SaleEncoder,
             safe=False,
         )
-# Needs to return 400 or 404 error
 
 
 @require_http_methods(["DELETE", "GET"])
