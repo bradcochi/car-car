@@ -4,8 +4,7 @@ from django.views.decorators.http import require_http_methods
 import json
 from .models import Appointment, Technician, AutomobileVO
 from .encoders import AppointmentEncoder, TechnicianEncoder, AutomobileVOEncoder
-# from inventory.api.inventory_rest.models import Automobile
-# Create your views here.
+
 
 @require_http_methods(["GET", "POST"])
 def api_list_technicians(request):
@@ -125,21 +124,3 @@ def api_finish_appointment(request, id):
         except Appointment.DoesNotExist:
             response = JsonResponse({"message": "Does not exist"}, status=404)
     return response
-
-# @require_http_methods(["PUT"])
-# def api_isVIP(request, id):
-#     if request.method == "PUT":
-#         appointment = Appointment.objects.get(id=id)
-#         try:
-#             for auto in Automobile.objects.all():
-#                 if auto.sold == False:
-#                     appointment.isVIP = "No"
-#                 else:
-#                     appointment.isVIP = "Yes"
-#             response = JsonResponse(
-#                 {"message": "Appointment has been updated"},
-#                 status=200
-#             )
-#         except Appointment.DoesNotExist:
-#             response = JsonResponse({"message": "Does not exist"}, status=404)
-#     return response
