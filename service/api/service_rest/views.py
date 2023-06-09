@@ -125,21 +125,3 @@ def api_finish_appointment(request, id):
         except Appointment.DoesNotExist:
             response = JsonResponse({"message": "Does not exist"}, status=404)
     return response
-
-# @require_http_methods(["PUT"])
-# def api_isVIP(request, id):
-#     if request.method == "PUT":
-#         appointment = Appointment.objects.get(id=id)
-#         try:
-#             for auto in Automobile.objects.all():
-#                 if auto.sold == False:
-#                     appointment.isVIP = "No"
-#                 else:
-#                     appointment.isVIP = "Yes"
-#             response = JsonResponse(
-#                 {"message": "Appointment has been updated"},
-#                 status=200
-#             )
-#         except Appointment.DoesNotExist:
-#             response = JsonResponse({"message": "Does not exist"}, status=404)
-#     return response
